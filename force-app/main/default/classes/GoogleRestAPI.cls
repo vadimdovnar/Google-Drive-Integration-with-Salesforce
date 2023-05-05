@@ -1,6 +1,4 @@
 public with sharing class GoogleRestAPI {
-
-
     @AuraEnabled(cacheable=true)
     public static Map<String, List<String>> getQueryWithFileHierarchy() {
         Http http = new Http();
@@ -8,9 +6,7 @@ public with sharing class GoogleRestAPI {
         request.setMethod('GET');
         request.setHeader('Accept', 'application/json');
         request.setHeader('Content-type', 'application/json');
-        request.setEndpoint(
-            'callout:Google_Docs_API/files?q=\'root\'+in+parents&fields=files(id,name,mimeType,createdTime,modifiedTime,parents)'
-        );
+        request.setEndpoint('callout:Google_Docs_API/files?q=\'root\'+in+parents&fields=files(id,name,mimeType,createdTime,modifiedTime,parents)');
 
         HttpResponse response = http.send(request);
         Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
@@ -40,5 +36,19 @@ public with sharing class GoogleRestAPI {
             }
         }
         return hierarchy;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static AllFilesWrapper getAllFiles() {
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setMethod('GET');
+        request.setHeader('Accept', 'application/json');
+        request.setHeader('Content-type', 'application/json');
+        request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,createdTime)');
+
+        HttpResponse response = http.send(request);
+        AllFilesWrapper result = AllFilesWrapper.parse(response.getBody());
+        return result;
     }
 }
