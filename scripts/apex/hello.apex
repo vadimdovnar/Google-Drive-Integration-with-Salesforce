@@ -5,8 +5,12 @@
 // You can also execute the entire file by running the command:
 //     SFDX: Execute Anonymous Apex with Editor Contents
 
-string tempvar = 'Enter_your_name_here';
-System.debug('Hello World!');
-System.debug('My name is ' + tempvar);
+Http http = new Http();
+HttpRequest request = new HttpRequest();
+request.setMethod('GET');
+request.setHeader('Accept', 'application/json');
+request.setHeader('Content-type', 'application/json');
+request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,emailAddress,createdTime)');
 
-System.debug('Hello World!');
+HttpResponse response = http.send(request);
+System.debug(':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::   ' + response.getBody());
