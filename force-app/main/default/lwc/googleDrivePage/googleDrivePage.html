@@ -1,13 +1,5 @@
 <!-- sldsValidatorIgnore -->
 <template>
-    <template if:true={files}>
-        <ul>
-            <template for:each={files} for:item="file">
-                <li key={file.id}>{file.name}</li>
-            </template>
-        </ul>
-    </template>
-
     <table
         aria-multiselectable="true"
         class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
@@ -102,95 +94,36 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <tr aria-selected="false" class="slds-hint-parent">
-                <th scope="row" tabindex="0">
-                    <div class="slds-truncate" title="Acme - 1,200 Widgets">
-                        <!-- <lightning-icon icon-name="doctype:folder" alternative-text="Folder file" title="Folder"></lightning-icon> -->
-                        <a href="#" tabindex="-1">Acme - 1,200 Widgets</a>
-                    </div>
-                </th>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="Acme">Acme</div>
-                </td>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="4/10/15">4/10/15</div>
-                </td>
-                <td role="gridcell">
-                    <button
-                        class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
-                        aria-haspopup="true"
-                        tabindex="-1"
-                        title="More actions for Acme - 1,200 Widgets"
-                    >
-                        <svg
-                            class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
-                            aria-hidden="true"
+        <tbody if:true={files}>
+            <template for:each={files} for:item="file">
+                <tr key={file.id} aria-selected="false" class="slds-hint-parent">
+                    <th scope="row" tabindex="0">
+                        <div class="slds-truncate" title="Acme - 1,200 Widgets">
+                            <!-- <lightning-icon icon-name="doctype:folder" alternative-text="Folder file" title="Folder"></lightning-icon> -->
+                            <a href="#" tabindex="-1">{file.name}</a>
+                        </div>
+                    </th>
+                    <td role="gridcell">
+                        <div class="slds-truncate" title="Acme">{file.createdTime}</div>
+                    </td>
+                    <td role="gridcell">
+                        <div class="slds-truncate" title="4/10/15">{file.modifiedTime}</div>
+                    </td>
+                    <td role="gridcell">
+                        <button
+                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                            aria-haspopup="true"
+                            tabindex="-1"
+                            title="More actions for Acme - 1,200 Widgets"
                         >
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                        </svg>
-                        <span class="slds-assistive-text">More actions for Acme - 1,200 Widgets</span>
-                    </button>
-                </td>
-            </tr>
-            <tr aria-selected="false" class="slds-hint-parent">
-                <th scope="row">
-                    <div class="slds-truncate" title="Acme - 200 Widgets">
-                        <a href="#" tabindex="-1">Acme - 200 Widgets</a>
-                    </div>
-                </th>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="Acme">Acme</div>
-                </td>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="1/31/15">1/31/15</div>
-                </td>
-                <td role="gridcell">
-                    <button
-                        class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
-                        aria-haspopup="true"
-                        tabindex="-1"
-                        title="More actions for Acme - 200 Widgets"
-                    >
-                        <svg
-                            class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
-                            aria-hidden="true"
-                        >
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                        </svg>
-                        <span class="slds-assistive-text">More actions for Acme - 200 Widgets</span>
-                    </button>
-                </td>
-            </tr>
-            <tr aria-selected="false" class="slds-hint-parent">
-                <th scope="row">
-                    <div class="slds-truncate" title="salesforce.com - 1,000 Widgets">
-                        <a href="#" tabindex="-1">salesforce.com - 1,000 Widgets</a>
-                    </div>
-                </th>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="salesforce.com">salesforce.com</div>
-                </td>
-                <td role="gridcell">
-                    <div class="slds-truncate" title="1/31/15 3:45PM">1/31/15 3:45PM</div>
-                </td>
-                <td role="gridcell">
-                    <button
-                        class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
-                        aria-haspopup="true"
-                        tabindex="-1"
-                        title="More actions for salesforce.com - 1,000 Widgets"
-                    >
-                        <svg
-                            class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
-                            aria-hidden="true"
-                        >
-                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                        </svg>
-                        <span class="slds-assistive-text">More actions for salesforce.com - 1,000 Widgets</span>
-                    </button>
-                </td>
-            </tr>
+                            <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small" aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                            </svg>
+                            <span class="slds-assistive-text">More actions for Acme - 1,200 Widgets</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
         </tbody>
     </table>
 </template>
