@@ -10,7 +10,22 @@ HttpRequest request = new HttpRequest();
 request.setMethod('GET');
 request.setHeader('Accept', 'application/json');
 request.setHeader('Content-type', 'application/json');
-request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,emailAddress,createdTime)');
+request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,createdTime)');
 
 HttpResponse response = http.send(request);
 System.debug(':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::   ' + response.getBody());
+
+
+
+public class AllFilesWrapper {
+    public User user;
+
+    public class User {
+        public String name;
+        public String twitter;
+    }
+}
+String json = '{ "user" : { "name" : "Simon Fell", "twitter" : "@superfell" } }';
+AllFilesWrapper r = (AllFilesWrapper) System.JSON.deserialize(json, AllFilesWrapper.class);
+
+System.debug(':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ' + r.name);

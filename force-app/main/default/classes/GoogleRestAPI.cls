@@ -39,7 +39,7 @@ public with sharing class GoogleRestAPI {
     }
 
     @AuraEnabled(cacheable=true)
-    public static AllFilesWrapper getAllFiles() {
+    public static String getAllFiles() {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setMethod('GET');
@@ -48,7 +48,11 @@ public with sharing class GoogleRestAPI {
         request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,createdTime)');
 
         HttpResponse response = http.send(request);
-        AllFilesWrapper result = AllFilesWrapper.parse(response.getBody());
-        return result;
+        DriveFilesResponse res = (DriveFilesResponse) JSON.deserialize(response.getBody(), DriveFilesResponse.class);
+        // System.debug(':::::::::::::::::::RES:::::::::::::::::::::' + res.files);
+        // for(DriveFilesResponse.DriveFile i : res.files) {
+        //     System.debug('******************************** ' + i.name);
+        // }
+        return JSON.serialize(res.files);
     }
 }
