@@ -99,8 +99,9 @@
                 <tr key={file.id} aria-selected="false" class="slds-hint-parent">
                     <th scope="row" tabindex="0">
                         <div class="slds-truncate" title="Acme - 1,200 Widgets">
+                            <lightning-icon class="slds-m-right_medium" icon-name={file.iconType} size="medium" alternative-text="Indicates approval"> </lightning-icon>
                             <!-- <lightning-icon icon-name="doctype:folder" alternative-text="Folder file" title="Folder"></lightning-icon> -->
-                            <a href="#" tabindex="-1">{file.name}</a>
+                            <a href={file.webViewLink} tabindex="-1">{file.name}</a>
                         </div>
                     </th>
                     <td role="gridcell">
