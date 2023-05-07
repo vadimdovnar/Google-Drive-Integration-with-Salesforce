@@ -1,0 +1,9 @@
+<template>
+    <div class="popup">
+        <div class="popup-content">
+            <slot name="content"></slot>
+            <button onclick={closePopup}>Close</button>
+        </div>
+    </div>
+    <div class="overlay" onclick={closePopup}></div>
+</template>
