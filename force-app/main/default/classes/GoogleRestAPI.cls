@@ -55,4 +55,16 @@ public with sharing class GoogleRestAPI {
         // }
         return JSON.serialize(res.files);
     }
+    @AuraEnabled(cacheable=true)
+    public static void createGoogleFile(String name, String mimeType) {
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setMethod('POST');
+        request.setHeader('Content-type', 'application/json');
+        request.setEndpoint('callout:Google_Docs_API/files');
+        String requestBody = '{"name": "' + name + '", "mimeType": "' + mimeType + '"}';
+        request.setBody(requestBody);
+
+        HttpResponse response = http.send(request);
+    }
 }
