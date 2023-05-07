@@ -1,23 +1,15 @@
-import { LightningElement, track } from "lwc";
+import { LightningElement, wire, track } from "lwc";
 import getAllFiles from "@salesforce/apex/GoogleRestAPI.getAllFiles";
 export default class GoogleDrivePage extends LightningElement {
     @track files;
-
-    // @wire(getAllFiles)
-    // loadGreeting({ data, error }) {
-    //     if (data) {
-    //         this.files = JSON.parse(data);
-    //     } else if (error) {
-    //         console.error(error);
-    //     }
-    // }
-
+    loadingData = true;
     connectedCallback() {
         getAllFiles()
             .then((result) => {
                 this.files = JSON.parse(result);
                 this.convertDateTime(this.files);
-                this.definesIconType(this.files)
+                this.definesIconType(this.files);
+                this.loadingData = false;
             })
             .catch((error) => {
                 console.error("ERROR::::::::::::::::::::::::: " + error);
@@ -34,8 +26,10 @@ export default class GoogleDrivePage extends LightningElement {
     splitString(str) {
         return str.match(/[a-zA-Z]+/g) || [];
     }
+    handleRefresh() {
+        location.reload();
+    }
     definesIconType(response) {
-
         for (let i = 0; i < response.length; i++) {
             // eslint-disable-next-line default-case, no-undef
             const words = this.splitString(response[i].mimeType);

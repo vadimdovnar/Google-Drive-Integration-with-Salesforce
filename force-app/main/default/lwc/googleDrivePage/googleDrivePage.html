@@ -1,6 +1,9 @@
 <!-- sldsValidatorIgnore -->
 <template>
-    <c-create-new-google-file-popup></c-create-new-google-file-popup>
+    <div if:true={loadingData} class="slds-spinner_container">
+        <lightning-spinner variant="brand" size="medium" alternative-text="Loading"></lightning-spinner>
+    </div>
+    <c-create-new-google-file-popup onrefresh={handleRefresh}></c-create-new-google-file-popup>
     <table
         aria-multiselectable="true"
         class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
