@@ -1,7 +1,8 @@
-import { LightningElement, wire, track } from "lwc";
+import { LightningElement, track } from "lwc";
 import getAllFiles from "@salesforce/apex/GoogleRestAPI.getAllFiles";
 export default class GoogleDrivePage extends LightningElement {
     @track files;
+    
     loadingData = true;
     connectedCallback() {
         getAllFiles()

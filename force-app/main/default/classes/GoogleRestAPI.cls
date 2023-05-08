@@ -67,4 +67,14 @@ public with sharing class GoogleRestAPI {
 
         HttpResponse response = http.send(request);
     }
+    @AuraEnabled(cacheable=true)
+    public static void deleteGoogleFile(String id) {
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setMethod('DELETE');
+        request.setHeader('Content-type', 'application/json');
+        request.setEndpoint('callout:Google_Docs_API/files/' + id);
+
+        HttpResponse response = http.send(request);
+    }
 }
