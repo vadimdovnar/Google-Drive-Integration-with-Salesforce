@@ -1,5 +1,6 @@
 import { LightningElement, track } from "lwc";
 import getAllFiles from "@salesforce/apex/GoogleRestAPI.getAllFiles";
+import deleteGoogleFile from "@salesforce/apex/GoogleRestAPI.deleteGoogleFile";
 export default class GoogleDrivePage extends LightningElement {
     @track files;
     
@@ -59,5 +60,10 @@ export default class GoogleDrivePage extends LightningElement {
                     break;
             }
         }
+    }
+    handleDelete(event) {
+        const key = event.target.getAttribute('data-id');
+        deleteGoogleFile({id : key});
+        location.reload();
     }
 }

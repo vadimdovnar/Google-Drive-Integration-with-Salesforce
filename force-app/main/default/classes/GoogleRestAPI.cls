@@ -48,6 +48,7 @@ public with sharing class GoogleRestAPI {
         request.setEndpoint('callout:Google_Docs_API/files?fields=files(id,name,modifiedTime,mimeType,webViewLink,webContentLink,createdTime)');
 
         HttpResponse response = http.send(request);
+        System.debug(response.getBody());
         DriveFilesResponse res = (DriveFilesResponse) JSON.deserialize(response.getBody(), DriveFilesResponse.class);
         // System.debug(':::::::::::::::::::RES:::::::::::::::::::::' + res.files);
         // for(DriveFilesResponse.DriveFile i : res.files) {
@@ -76,5 +77,6 @@ public with sharing class GoogleRestAPI {
         request.setEndpoint('callout:Google_Docs_API/files/' + id);
 
         HttpResponse response = http.send(request);
+        System.debug(response.getBody());
     }
 }
